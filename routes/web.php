@@ -110,11 +110,3 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // Route::middleware(['auth', 'verified'])->group(function () {
 //     // Aquí van las rutas protegidas que requieren email verificado
 // });
-
-// --- RUTA TEMPORAL PARA LIMPIAR CACHE EN PRODUCCIÓN ---
-Route::get('/clear-cache', function() {
-    Artisan::call('config:cache');
-    Artisan::call('cache:clear');
-    Artisan::call('view:clear');
-    return 'Cache cleared!';
-});

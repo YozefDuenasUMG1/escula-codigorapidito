@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
-    <link rel="stylesheet" href="{{ asset('css/loginstyle.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/loginstyle.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body>
@@ -128,7 +128,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/loginjs.js') }}"></script>
+    <script src="{{ secure_asset('js/loginjs.js') }}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
