@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Artisan;
 */
 
 // Rutas públicas de vistas
-Route::view('/', 'welcome');
+// Route::view('/', 'welcome');
+Route::redirect('/', '/login');
 Route::view('/dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 Route::view('/sidebar-demo', 'sidebar-demo')->name('sidebar.demo');
 // Reemplazar la vista directa por el método create del controlador para pasar sucursales, cursos y niveles
