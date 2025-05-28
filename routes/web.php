@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\ReporteController;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,3 +110,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // Route::middleware(['auth', 'verified'])->group(function () {
 //     // Aquí van las rutas protegidas que requieren email verificado
 // });
+
+// --- RUTA TEMPORAL PARA LIMPIAR CACHE EN PRODUCCIÓN ---
+Route::get('/clear-cache', function() {
+    Artisan::call('config:cache');
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    return 'Cache cleared!';
+});
