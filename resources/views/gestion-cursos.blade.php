@@ -14,6 +14,7 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
+                                <th>Profesor</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -23,6 +24,21 @@
                                 <td>{{ $curso->id_curso }}</td>
                                 <td>{{ $curso->nombre }}</td>
                                 <td>{{ $curso->descripcion }}</td>
+                                <td>
+                                    <form action="{{ route('cursos.update', $curso->id_curso) }}" method="POST" style="display:inline-block; min-width: 180px;">
+                                        @csrf
+                                        @method('PUT')
+                                        <select name="id_profesor" class="form-select form-select-sm d-inline w-auto" onchange="this.form.submit()">
+                                            <option value="">Sin asignar</option>
+                                            @foreach($profesores as $profesor)
+                                                <option value="{{ $profesor->id_profesor }}" @if($curso->id_profesor == $profesor->id_profesor) selected @endif>{{ $profesor->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                        <input type="hidden" name="nombre" value="{{ $curso->nombre }}">
+                                        <input type="hidden" name="descripcion" value="{{ $curso->descripcion }}">
+                                        <input type="hidden" name="id_nivel" value="{{ $curso->id_nivel }}">
+                                    </form>
+                                </td>
                                 <td>
                                     <a href="{{ route('cursos.edit', $curso->id_curso) }}" class="btn btn-warning btn-sm">Editar</a>
                                     <form action="{{ route('cursos.destroy', $curso->id_curso) }}" method="POST" style="display:inline-block">

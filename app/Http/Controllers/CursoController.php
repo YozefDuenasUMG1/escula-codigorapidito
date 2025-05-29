@@ -88,8 +88,9 @@ class CursoController extends Controller
 
     public function gestion()
     {
-        $cursos = \App\Models\Curso::with('inscripciones')->paginate(10);
+        $cursos = \App\Models\Curso::with(['inscripciones', 'profesor'])->paginate(10);
         $niveles = \App\Models\Nivel::all();
-        return view('gestion-cursos', compact('cursos', 'niveles'));
+        $profesores = \App\Models\Profesor::all();
+        return view('gestion-cursos', compact('cursos', 'niveles', 'profesores'));
     }
 }
