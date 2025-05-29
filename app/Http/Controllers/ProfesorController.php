@@ -71,10 +71,10 @@ class ProfesorController extends Controller
                 'password' => Hash::make($password),
                 'role' => 'profesor',
             ]);
-            // $user->notify(new CredencialesUsuario($user->email, $password, 'profesor'));
-            // Notification::route('mail', $adminEmail)
-            //     ->notify(new \App\Notifications\CredencialesUsuario($user->email, $password, 'profesor'));
-            $mensaje .= ' (Envío de credenciales desactivado en desarrollo).';
+            $user->notify(new CredencialesUsuario($user->email, $password, 'profesor'));
+            Notification::route('mail', $adminEmail)
+                ->notify(new \App\Notifications\CredencialesUsuario($user->email, $password, 'profesor'));
+            $mensaje .= ' Las credenciales han sido enviadas al correo del profesor y al administrador.';
         }
         return redirect()->route('profesores.index')->with('success', $mensaje);
     }

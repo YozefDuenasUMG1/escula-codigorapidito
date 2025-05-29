@@ -5,7 +5,7 @@
     </div>
     <ul class="menu">
         <li class="menu-item menu-item-static">
-            <a href="{{ route('dashboard') }}" class="menu-link">
+            <a href="{{ route('dashboard.alumno') }}" class="menu-link">
                 <i class='bx bx-home-alt-2'></i>
                 <span>Inicio</span>
             </a>
