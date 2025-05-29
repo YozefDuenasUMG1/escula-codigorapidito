@@ -10,6 +10,12 @@
                 <span>Inicio</span>
             </a>
         </li>
+        <li class="menu-item menu-item-static">
+            <a href="{{ route('alumno.datos-inscripcion') }}" class="menu-link">
+                <i class='bx bx-id-card'></i>
+                <span>Datos de inscripción</span>
+            </a>
+        </li>
         {{-- <li class="menu-item menu-item-static">
             <a href="{{ route('alumnos.inscribir') }}" class="menu-link">
                 <i class='bx bx-user-plus'></i>
@@ -38,12 +44,6 @@
             <a href="{{ route('solicitud-inscripcion.create') }}" class="menu-link">
                 <i class='bx bx-envelope'></i>
                 <span>Solicitar inscripción</span>
-            </a>
-        </li>
-        <li class="menu-item menu-item-static">
-            <a href="{{ route('alumno.datos-inscripcion') }}" class="menu-link">
-                <i class='bx bx-id-card'></i>
-                <span>Datos de inscripción</span>
             </a>
         </li>
     </ul>
