@@ -29,7 +29,11 @@
                     <div class="alert alert-warning">
                         <strong>¿Aún no estás inscrito?</strong> Rellena este formulario para solicitar tu inscripción.
                     </div>
-                    @include('alumno.solicitud-inscripcion-form')
+                    @include('alumno.solicitud-inscripcion-form', [
+                        'sucursales' => \App\Models\Sucursal::all(),
+                        'cursos' => \App\Models\Curso::all(),
+                        'niveles' => \App\Models\Nivel::all(),
+                    ])
                 @endif
             </div>
         </div>
