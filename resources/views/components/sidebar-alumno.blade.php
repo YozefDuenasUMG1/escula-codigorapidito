@@ -40,6 +40,12 @@
                 <span>Solicitar inscripción</span>
             </a>
         </li>
+        <li class="menu-item menu-item-static">
+            <a href="{{ route('alumno.datos-inscripcion') }}" class="menu-link">
+                <i class='bx bx-id-card'></i>
+                <span>Datos de inscripción</span>
+            </a>
+        </li>
     </ul>
     <div class="footer">
         <div class="user">

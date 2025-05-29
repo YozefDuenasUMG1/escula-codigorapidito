@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Notifications\CredencialesUsuario;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class AlumnoController extends Controller
 {
@@ -145,5 +146,11 @@ class AlumnoController extends Controller
         $sucursales = Sucursal::all();
         $niveles = ['Principiantes I', 'Principiantes II', 'Avanzados I', 'Avanzados II'];
         return view('gestion-alumnos', compact('alumnos', 'sucursales', 'niveles', 'sort', 'direction'));
+    }
+
+    public function datosInscripcion()
+    {
+        $alumno = Auth::user()->alumno;
+        return view('alumno.datos-inscripcion', compact('alumno'));
     }
 }
