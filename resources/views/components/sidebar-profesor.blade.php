@@ -61,14 +61,6 @@
                 </li>
             </ul>
         </li>
-        @if(!auth()->user()->profesor)
-        <li class="menu-item menu-item-static">
-            <a href="{{ route('solicitud-inscripcion-profesor.create') }}" class="menu-link">
-                <i class='bx bx-envelope'></i>
-                <span>Solicitar inscripción como profesor</span>
-            </a>
-        </li>
-        @endif
     </ul>
     <div class="footer">
         <div class="user">

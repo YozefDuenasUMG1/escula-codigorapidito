@@ -163,45 +163,4 @@ class ProfesorController extends Controller
         $profesor->delete();
         return back()->with('success', 'Profesor y usuario eliminados correctamente.');
     }
-
-    /**
-     * Mostrar formulario de solicitud de inscripción como profesor
-     */
-    public function mostrarSolicitudInscripcion()
-    {
-        $sucursales = \App\Models\Sucursal::all();
-        $user = auth()->user();
-        return view('profesor.solicitud-inscripcion-form', compact('sucursales', 'user'));
-    }
-
-    /**
-     * Procesar solicitud de inscripción de profesor
-     */
-    public function guardarSolicitudInscripcion(Request $request)
-    {
-        $user = auth()->user();
-        // Validar si ya es profesor
-        if ($user->profesor) {
-            return redirect()->back()->with('error', 'Ya eres profesor. No puedes enviar otra solicitud.');
-        }
-        $validated = $request->validate([
-            'numero' => 'required|string|max:8',
-            'direccion' => 'required|string',
-            'id_sucursal' => 'required|exists:sucursales,id_sucursal',
-            'especialidad' => 'required|string|max:255',
-        ]);
-        // Puedes crear un modelo SolicitudInscripcionProfesor o reutilizar el de alumno con un campo tipo
-        \App\Models\SolicitudInscripcion::create([
-            'user_id' => $user->id,
-            'nombre' => $user->name,
-            'email' => $user->email,
-            'numero' => $validated['numero'],
-            'direccion' => $validated['direccion'],
-            'id_sucursal' => $validated['id_sucursal'],
-            'estado' => 'pendiente',
-            // 'tipo' => 'profesor', // Si agregas un campo tipo
-            // 'especialidad' => $validated['especialidad'], // Si agregas el campo en la tabla
-        ]);
-        return redirect()->route('dashboard.profesor')->with('success', 'Solicitud enviada correctamente. Un administrador revisará tu inscripción.');
-    }
 }

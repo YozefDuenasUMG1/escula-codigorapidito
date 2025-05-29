@@ -131,9 +131,3 @@ Route::get('/gestion-profesores', [ProfesorController::class, 'index'])->name('p
 
 // Ruta visual de todos los cursos y niveles
 Route::get('/cursos-lista', [\App\Http\Controllers\CursoController::class, 'verListaVisual'])->name('cursos.lista.visual');
-
-// Solicitud de inscripción de profesor
-Route::middleware(['auth', 'role:profesor'])->group(function () {
-    Route::get('/solicitud-inscripcion-profesor', [\App\Http\Controllers\ProfesorController::class, 'mostrarSolicitudInscripcion'])->name('solicitud-inscripcion-profesor.create');
-    Route::post('/solicitud-inscripcion-profesor', [\App\Http\Controllers\ProfesorController::class, 'guardarSolicitudInscripcion'])->name('solicitud-inscripcion-profesor.store');
-});
