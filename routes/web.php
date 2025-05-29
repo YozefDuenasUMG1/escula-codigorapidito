@@ -52,12 +52,12 @@ Route::resource('sucursales', App\Http\Controllers\SucursalController::class);
 
 // Ruta explícita para el listado de alumnos (para el sidebar)
 Route::get('/alumnos-lista', [AlumnoController::class, 'index'])->name('alumnos.lista');
-// Ruta explícita para el listado de docentes/profesores (para el sidebar)
-Route::get('/docentes-lista', [ProfesorController::class, 'index'])->name('docentes.lista');
+// Ruta explícita para el listado de profesores (para el sidebar)
+Route::get('/profesores-lista', [ProfesorController::class, 'index'])->name('profesores.lista');
 
-// Rutas explícitas para ver y editar docentes
-Route::get('/docentes/{id}', [ProfesorController::class, 'show'])->name('docentes.show');
-Route::get('/docentes/{id}/editar', [ProfesorController::class, 'edit'])->name('docentes.edit');
+// Rutas explícitas para ver y editar profesores
+Route::get('/profesores/{id}', [ProfesorController::class, 'show'])->name('profesores.show');
+Route::get('/profesores/{id}/editar', [ProfesorController::class, 'edit'])->name('profesores.edit');
 
 // Rutas de autenticación
 require __DIR__.'/auth.php';
@@ -123,3 +123,8 @@ Route::middleware(['auth', 'role:alumno'])->group(function () {
 // Route::middleware(['auth', 'verified'])->group(function () {
 //     // Aquí van las rutas protegidas que requieren email verificado
 // });
+
+// Ruta para añadir profesor
+Route::get('/añadir-profesor', [App\Http\Controllers\ProfesorController::class, 'create'])->name('profesores.create');
+// Ruta para gestión de profesores
+Route::get('/gestion-profesores', [ProfesorController::class, 'index'])->name('profesores.gestion');

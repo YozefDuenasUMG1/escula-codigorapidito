@@ -51,31 +51,25 @@
         </li>
     </ul>
     <div class="letramod">
-        <span>Docentes</span>
+        <span>Profesores</span>
     </div>
     <ul class="menu">
         <li class="menu-item menu-item-static">
-            <a href="{{ route('docentes.lista') }}" class="menu-link">
+            <a href="{{ route('profesores.lista') }}" class="menu-link">
                 <i class='bx bx-user'></i>
-                <span>Lista de docentes</span>
+                <span>Lista de profesores</span>
             </a>
         </li>
         <li class="menu-item menu-item-static">
-            <a href="{{ route('docentes.añadir') }}" class="menu-link">
+            <a href="{{ route('profesores.create') }}" class="menu-link">
                 <i class='bx bx-plus-circle'></i>
-                <span>Añadir docentes</span>
+                <span>Añadir profesor</span>
             </a>
         </li>
         <li class="menu-item menu-item-static">
-            <a href="{{ route('docentes.gestion') }}" class="menu-link">
+            <a href="{{ route('profesores.gestion') }}" class="menu-link">
                 <i class='bx bx-book-bookmark'></i>
-                <span>Gestión de docentes</span>
-            </a>
-        </li>
-        <li class="menu-item menu-item-static">
-            <a href="{{ route('notas.create') }}" class="menu-link">
-                <i class='bx bx-edit'></i>
-                <span>Ingresar punteos</span>
+                <span>Gestión de profesores</span>
             </a>
         </li>
     </ul>
