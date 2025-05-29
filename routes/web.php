@@ -109,6 +109,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/usuarios/{id}', [\App\Http\Controllers\UserController::class, 'update'])->name('usuarios.update');
     Route::get('/admin/solicitudes-inscripcion', [\App\Http\Controllers\SolicitudInscripcionController::class, 'index'])->name('solicitudes-inscripcion.index');
     Route::post('/admin/solicitudes-inscripcion/{id}/aceptar', [\App\Http\Controllers\SolicitudInscripcionController::class, 'aceptar'])->name('solicitudes-inscripcion.aceptar');
+    Route::get('/admin/gestion-alumnos', [\App\Http\Controllers\AlumnoController::class, 'gestionAdmin'])->name('gestion-alumnos.admin');
+    Route::post('/admin/alumnos/{id}/reset-password', [\App\Http\Controllers\AlumnoController::class, 'resetPassword'])->name('alumnos.reset-password');
+    Route::post('/admin/alumnos/{id}/toggle-active', [\App\Http\Controllers\AlumnoController::class, 'toggleActive'])->name('alumnos.toggle-active');
+    Route::delete('/admin/alumnos/{id}', [\App\Http\Controllers\AlumnoController::class, 'destroyAdmin'])->name('alumnos.destroy-admin');
+
+    Route::get('/admin/gestion-profesores', [\App\Http\Controllers\ProfesorController::class, 'gestionAdmin'])->name('gestion-profesores.admin');
+    Route::post('/admin/profesores/{id}/reset-password', [\App\Http\Controllers\ProfesorController::class, 'resetPassword'])->name('profesores.reset-password');
+    Route::post('/admin/profesores/{id}/toggle-active', [\App\Http\Controllers\ProfesorController::class, 'toggleActive'])->name('profesores.toggle-active');
+    Route::delete('/admin/profesores/{id}', [\App\Http\Controllers\ProfesorController::class, 'destroyAdmin'])->name('profesores.destroy-admin');
 });
 
 // Rutas para que los alumnos creen y envíen solicitudes de inscripción

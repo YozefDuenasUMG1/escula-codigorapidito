@@ -66,6 +66,8 @@ class AlumnoController extends Controller
                 'password' => Hash::make($password),
                 'role' => 'alumno',
             ]);
+            $alumno->id_user = $user->id;
+            $alumno->save();
             $user->notify(new CredencialesUsuario($user->email, $password, 'alumno'));
             Notification::route('mail', $adminEmail)
                 ->notify(new \App\Notifications\CredencialesUsuario($user->email, $password, 'alumno'));
@@ -163,5 +165,45 @@ class AlumnoController extends Controller
         }
         $pdf = Pdf::loadView('alumno.datos-inscripcion-pdf', compact('alumno'));
         return $pdf->download('datos-inscripcion.pdf');
+    }
+
+    public function gestionAdmin()
+    {
+        $alumnos = \App\Models\Alumno::with(['user'])->paginate(15);
+        return view('admin.gestion-alumnos', compact('alumnos'));
+    }
+
+    public function resetPassword($id)
+    {
+        $alumno = \App\Models\Alumno::with('user')->findOrFail($id);
+        if ($alumno->user) {
+            $newPassword = \Str::random(10);
+            $alumno->user->password = \Hash::make($newPassword);
+            $alumno->user->save();
+            $alumno->user->notify(new \App\Notifications\CredencialesUsuario($alumno->user->email, $newPassword, 'alumno'));
+            return back()->with('success', 'Contraseña reseteada y enviada al alumno.');
+        }
+        return back()->with('error', 'No se encontró el usuario relacionado.');
+    }
+
+    public function toggleActive($id)
+    {
+        $alumno = \App\Models\Alumno::with('user')->findOrFail($id);
+        if ($alumno->user) {
+            $alumno->user->active = !$alumno->user->active;
+            $alumno->user->save();
+            return back()->with('success', 'Estado de la cuenta actualizado.');
+        }
+        return back()->with('error', 'No se encontró el usuario relacionado.');
+    }
+
+    public function destroyAdmin($id)
+    {
+        $alumno = \App\Models\Alumno::with('user')->findOrFail($id);
+        if ($alumno->user) {
+            $alumno->user->delete();
+        }
+        $alumno->delete();
+        return back()->with('success', 'Alumno y usuario eliminados correctamente.');
     }
 }

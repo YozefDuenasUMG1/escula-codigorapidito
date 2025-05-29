@@ -71,6 +71,8 @@ class ProfesorController extends Controller
                 'password' => Hash::make($password),
                 'role' => 'profesor',
             ]);
+            $profesor->id_user = $user->id;
+            $profesor->save();
             $user->notify(new CredencialesUsuario($user->email, $password, 'profesor'));
             Notification::route('mail', $adminEmail)
                 ->notify(new \App\Notifications\CredencialesUsuario($user->email, $password, 'profesor'));
@@ -126,5 +128,45 @@ class ProfesorController extends Controller
         $profesor = Profesor::findOrFail($id);
         $profesor->delete();
         return redirect()->route('profesores.index')->with('success', 'Profesor eliminado exitosamente.');
+    }
+
+    public function gestionAdmin()
+    {
+        $profesores = \App\Models\Profesor::with(['user'])->paginate(15);
+        return view('admin.gestion-profesores', compact('profesores'));
+    }
+
+    public function resetPassword($id)
+    {
+        $profesor = \App\Models\Profesor::with('user')->findOrFail($id);
+        if ($profesor->user) {
+            $newPassword = \Str::random(10);
+            $profesor->user->password = \Hash::make($newPassword);
+            $profesor->user->save();
+            $profesor->user->notify(new \App\Notifications\CredencialesUsuario($profesor->user->email, $newPassword, 'profesor'));
+            return back()->with('success', 'Contraseña reseteada y enviada al profesor.');
+        }
+        return back()->with('error', 'No se encontró el usuario relacionado.');
+    }
+
+    public function toggleActive($id)
+    {
+        $profesor = \App\Models\Profesor::with('user')->findOrFail($id);
+        if ($profesor->user) {
+            $profesor->user->active = !$profesor->user->active;
+            $profesor->user->save();
+            return back()->with('success', 'Estado de la cuenta actualizado.');
+        }
+        return back()->with('error', 'No se encontró el usuario relacionado.');
+    }
+
+    public function destroyAdmin($id)
+    {
+        $profesor = \App\Models\Profesor::with('user')->findOrFail($id);
+        if ($profesor->user) {
+            $profesor->user->delete();
+        }
+        $profesor->delete();
+        return back()->with('success', 'Profesor y usuario eliminados correctamente.');
     }
 }

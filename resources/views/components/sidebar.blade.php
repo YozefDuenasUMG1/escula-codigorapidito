@@ -135,9 +135,15 @@
     </div>
     <ul class="menu">
         <li class="menu-item menu-item-static">
-            <a href="{{ route('solicitudes-inscripcion.index') }}" class="menu-link">
-                <i class='bx bx-envelope'></i>
-                <span>Solicitudes de inscripción</span>
+            <a href="{{ route('gestion-alumnos.admin') }}" class="menu-link">
+                <i class='bx bx-user'></i>
+                <span>Gestión de alumnos</span>
+            </a>
+        </li>
+        <li class="menu-item menu-item-static">
+            <a href="{{ route('gestion-profesores.admin') }}" class="menu-link">
+                <i class='bx bx-chalkboard'></i>
+                <span>Gestión de profesores</span>
             </a>
         </li>
     </ul>

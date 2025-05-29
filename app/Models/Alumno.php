@@ -31,4 +31,9 @@ class Alumno extends Model
     {
         return $this->belongsTo(\App\Models\Curso::class, 'id_curso');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'id_user');
+    }
 }
