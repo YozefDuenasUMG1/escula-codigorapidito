@@ -18,8 +18,10 @@
                 <th>Número</th>
                 <th>Dirección</th>
                 <th>Sucursal</th>
+                <th>Rol</th>
                 <th>Curso</th>
                 <th>Nivel</th>
+                <th>Especialidad</th>
                 <th>Estado</th>
                 <th>Acciones</th>
             </tr>
@@ -33,8 +35,16 @@
                     <td>{{ $solicitud->numero }}</td>
                     <td>{{ $solicitud->direccion }}</td>
                     <td>{{ $solicitud->sucursal->nombre ?? $solicitud->id_sucursal }}</td>
+                    <td>
+                        @if($solicitud->curso && $solicitud->nivel)
+                            Alumno
+                        @else
+                            Profesor
+                        @endif
+                    </td>
                     <td>{{ $solicitud->curso->nombre ?? $solicitud->id_curso }}</td>
                     <td>{{ $solicitud->nivel->nombre ?? $solicitud->id_nivel }}</td>
+                    <td>{{ $solicitud->especialidad ?? '-' }}</td>
                     <td>{{ ucfirst($solicitud->estado) }}</td>
                     <td>
                         @if($solicitud->estado === 'pendiente')

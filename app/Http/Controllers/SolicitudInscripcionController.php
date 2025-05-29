@@ -64,19 +64,33 @@ class SolicitudInscripcionController extends Controller
     public function aceptar($id)
     {
         $solicitud = \App\Models\SolicitudInscripcion::findOrFail($id);
-        // Verifica si ya existe un alumno con ese email
-        if (\App\Models\Alumno::where('email', $solicitud->email)->exists()) {
-            return redirect()->back()->with('error', 'Ya existe un alumno inscrito con este correo.');
+        // Si la solicitud es de alumno (tiene curso y nivel)
+        if ($solicitud->curso && $solicitud->nivel) {
+            // Verifica si ya existe un alumno con ese email
+            if (\App\Models\Alumno::where('email', $solicitud->email)->exists()) {
+                return redirect()->back()->with('error', 'Ya existe un alumno inscrito con este correo.');
+            }
+            $alumno = \App\Models\Alumno::create([
+                'nombre' => $solicitud->nombre,
+                'email' => $solicitud->email,
+                'numero' => $solicitud->numero,
+                'direccion' => $solicitud->direccion,
+                'id_sucursal' => $solicitud->id_sucursal,
+                'id_curso' => $solicitud->id_curso,
+                'id_nivel' => $solicitud->id_nivel,
+            ]);
+        } else { // Si es profesor
+            if (\App\Models\Profesor::where('email', $solicitud->email)->exists()) {
+                return redirect()->back()->with('error', 'Ya existe un profesor inscrito con este correo.');
+            }
+            \App\Models\Profesor::create([
+                'nombre' => $solicitud->nombre,
+                'email' => $solicitud->email,
+                'telefono' => $solicitud->numero,
+                'especialidad' => $solicitud->especialidad ?? '',
+                'id_sucursal' => $solicitud->id_sucursal,
+            ]);
         }
-        $alumno = \App\Models\Alumno::create([
-            'nombre' => $solicitud->nombre,
-            'email' => $solicitud->email,
-            'numero' => $solicitud->numero,
-            'direccion' => $solicitud->direccion,
-            'id_sucursal' => $solicitud->id_sucursal,
-            'id_curso' => $solicitud->id_curso,
-            'id_nivel' => $solicitud->id_nivel,
-        ]);
         $solicitud->estado = 'aceptada';
         $solicitud->save();
         return redirect()->back()->with('success', 'El usuario ha sido inscrito correctamente.');
