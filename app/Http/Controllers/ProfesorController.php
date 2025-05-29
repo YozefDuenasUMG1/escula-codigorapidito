@@ -78,7 +78,7 @@ class ProfesorController extends Controller
                 ->notify(new \App\Notifications\CredencialesUsuario($user->email, $password, 'profesor'));
             $mensaje .= ' Las credenciales han sido enviadas al correo del profesor y al administrador.';
         }
-        return redirect()->route('profesores.index')->with('success', $mensaje);
+        return redirect()->route('docentes.lista')->with('success', 'Docente agregado correctamente.');
     }
 
     /**

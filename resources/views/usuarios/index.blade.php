@@ -13,7 +13,6 @@
                 <th>Nombre</th>
                 <th>Email</th>
                 <th>Rol</th>
-                <th>Activo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -24,7 +23,6 @@
                 <td>{{ $usuario->name }}</td>
                 <td>{{ $usuario->email }}</td>
                 <td>{{ $usuario->role }}</td>
-                <td>{{ $usuario->active ? 'Sí' : 'No' }}</td>
                 <td>
                     <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-warning btn-sm">Editar</a>
                     <form action="{{ route('usuarios.reset-password', $usuario->id) }}" method="POST" style="display:inline-block;">
