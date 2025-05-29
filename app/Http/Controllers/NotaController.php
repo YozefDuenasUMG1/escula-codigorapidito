@@ -23,9 +23,9 @@ class NotaController extends Controller
      */
     public function create()
     {
-        // Cargar inscripciones con relaciones alumno, curso, nivel y sucursal
-        $inscripciones = Inscripcion::with(['alumno', 'curso', 'nivel', 'sucursal'])->get();
-        return view('notas.create', compact('inscripciones'));
+        // Cargar todos los alumnos registrados
+        $alumnos = \App\Models\Alumno::all();
+        return view('notas.create', compact('alumnos'));
     }
 
     /**

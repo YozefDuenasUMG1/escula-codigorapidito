@@ -14,11 +14,11 @@
     <form method="POST" action="{{ route('notas.store') }}">
         @csrf
         <div class="mb-3">
-            <label for="id_inscripcion" class="form-label">Inscripción (Alumno - Curso - Nivel - Sucursal)</label>
-            <select name="id_inscripcion" id="id_inscripcion" class="form-select" required>
-                <option value="">Seleccione una inscripción</option>
-                @foreach($inscripciones as $inscripcion)
-                    <option value="{{ $inscripcion->id_inscripcion }}">{{ $inscripcion->alumno ? $inscripcion->alumno->nombre : 'Sin alumno' }} | {{ $inscripcion->curso ? $inscripcion->curso->nombre : 'Sin curso' }} | {{ $inscripcion->nivel ? $inscripcion->nivel->nombre : 'Sin nivel' }} | {{ $inscripcion->sucursal ? $inscripcion->sucursal->nombre : 'Sin sucursal' }}</option>
+            <label for="id_alumno" class="form-label">Alumno</label>
+            <select name="id_alumno" id="id_alumno" class="form-select" required>
+                <option value="">Seleccione un alumno</option>
+                @foreach($alumnos as $alumno)
+                    <option value="{{ $alumno->id_alumno }}">{{ $alumno->nombre }}</option>
                 @endforeach
             </select>
         </div>
@@ -54,9 +54,9 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        $('#id_inscripcion').select2({
+        $('#id_alumno').select2({
             width: '100%',
-            placeholder: 'Seleccione una inscripción',
+            placeholder: 'Seleccione un alumno',
             allowClear: true
         });
     });
