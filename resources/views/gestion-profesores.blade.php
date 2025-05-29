@@ -60,7 +60,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $docentes->links() }}
+                    {{ $profesores->links() }}
                 </div>
             </div>
         </div>
