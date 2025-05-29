@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use App\Notifications\CredencialesUsuario;
 
 class UserController extends Controller
 {
@@ -32,5 +35,24 @@ class UserController extends Controller
         ]);
         $usuario->update($validated);
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado correctamente.');
+    }
+
+    // Resetear contraseña de usuario
+    public function resetPassword($id)
+    {
+        $usuario = User::findOrFail($id);
+        $newPassword = Str::random(10);
+        $usuario->password = Hash::make($newPassword);
+        $usuario->save();
+        $usuario->notify(new CredencialesUsuario($usuario->email, $newPassword, $usuario->role));
+        return back()->with('success', 'Contraseña reseteada y enviada al usuario.');
+    }
+
+    // Eliminar usuario
+    public function destroy($id)
+    {
+        $usuario = User::findOrFail($id);
+        $usuario->delete();
+        return back()->with('success', 'Usuario eliminado correctamente.');
     }
 }

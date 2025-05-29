@@ -16,7 +16,6 @@
                 <th>Email</th>
                 <th>Rol</th>
                 <th>Activo</th>
-                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -27,25 +26,6 @@
                     <td>{{ $alumno->user->email ?? $alumno->email }}</td>
                     <td>{{ $alumno->user->role ?? '-' }}</td>
                     <td>{{ ($alumno->user && $alumno->user->active) ? 'Sí' : 'No' }}</td>
-                    <td>
-                        @if($alumno->user)
-                        <form action="{{ route('alumnos.reset-password', $alumno->id_alumno) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button type="submit" class="btn btn-warning btn-sm">Resetear contraseña</button>
-                        </form>
-                        <form action="{{ route('alumnos.toggle-active', $alumno->id_alumno) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            <button type="submit" class="btn btn-info btn-sm">{{ $alumno->user->active ? 'Desactivar' : 'Activar' }}</button>
-                        </form>
-                        <form action="{{ route('alumnos.destroy-admin', $alumno->id_alumno) }}" method="POST" style="display:inline-block;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                        </form>
-                        @else
-                        <span class="text-danger">Sin usuario</span>
-                        @endif
-                    </td>
                 </tr>
             @endforeach
         </tbody>

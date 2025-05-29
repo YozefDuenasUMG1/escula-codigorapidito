@@ -130,23 +130,6 @@
             </a>
         </li>
     </ul>
-    <div class="letramod">
-        <span>Administración</span>
-    </div>
-    <ul class="menu">
-        <li class="menu-item menu-item-static">
-            <a href="{{ route('gestion-alumnos.admin') }}" class="menu-link">
-                <i class='bx bx-user'></i>
-                <span>Gestión de alumnos</span>
-            </a>
-        </li>
-        <li class="menu-item menu-item-static">
-            <a href="{{ route('gestion-profesores.admin') }}" class="menu-link">
-                <i class='bx bx-chalkboard'></i>
-                <span>Gestión de profesores</span>
-            </a>
-        </li>
-    </ul>
     <div class="footer">
         
         <div class="user">
