@@ -99,15 +99,8 @@
                 @enderror
                 <div class="container-input">
                     <ion-icon name="people-outline"></ion-icon>
-                    <select name="role" required>
-                        <option value="alumno" {{ old('role') == 'alumno' ? 'selected' : '' }}>Alumno</option>
-                        <option value="profesor" {{ old('role') == 'profesor' ? 'selected' : '' }}>Profesor</option>
-                        @auth
-                            @if(Auth::user()->role === 'admin')
-                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Administrador</option>
-                            @endif
-                        @endauth
-                    </select>
+                    <input type="hidden" name="role" value="alumno">
+                    <input type="text" class="form-control" value="Alumno" readonly>
                 </div>
                 @error('role')
                     <div class="error" style="color:red; font-size:12px;">{{ $message }}</div>
