@@ -9,6 +9,18 @@ class SolicitudInscripcion extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'nombre',
+        'email',
+        'numero',
+        'direccion',
+        'id_sucursal',
+        'id_curso',
+        'id_nivel',
+        'estado',
+    ];
+
     public function sucursal() {
         return $this->belongsTo(\App\Models\Sucursal::class, 'id_sucursal');
     }
