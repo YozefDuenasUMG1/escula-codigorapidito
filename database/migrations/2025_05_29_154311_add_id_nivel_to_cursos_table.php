@@ -12,10 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cursos', function (Blueprint $table) {
-            if (!Schema::hasColumn('cursos', 'id_profesor')) {
-                $table->unsignedBigInteger('id_profesor')->nullable()->after('descripcion');
-                $table->foreign('id_profesor')->references('id_profesor')->on('profesores')->onDelete('set null');
-            }
+            $table->unsignedBigInteger('id_nivel')->nullable()->after('id_profesor');
+            $table->foreign('id_nivel')->references('id_nivel')->on('niveles')->onDelete('set null');
         });
     }
 
@@ -25,10 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('cursos', function (Blueprint $table) {
-            if (Schema::hasColumn('cursos', 'id_profesor')) {
-                $table->dropForeign(['id_profesor']);
-                $table->dropColumn('id_profesor');
-            }
+            $table->dropForeign(['id_nivel']);
+            $table->dropColumn('id_nivel');
         });
     }
 };
