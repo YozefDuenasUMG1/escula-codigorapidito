@@ -64,10 +64,10 @@ class AlumnoController extends Controller
                 'password' => Hash::make($password),
                 'role' => 'alumno',
             ]);
-            // $user->notify(new CredencialesUsuario($user->email, $password, 'alumno'));
-            // Notification::route('mail', $adminEmail)
-            //     ->notify(new \App\Notifications\CredencialesUsuario($user->email, $password, 'alumno'));
-            $mensaje .= ' (Envío de credenciales desactivado en desarrollo).';
+            $user->notify(new CredencialesUsuario($user->email, $password, 'alumno'));
+            Notification::route('mail', $adminEmail)
+                ->notify(new \App\Notifications\CredencialesUsuario($user->email, $password, 'alumno'));
+            $mensaje .= ' Las credenciales han sido enviadas al correo del alumno y al administrador.';
         }
         return redirect()->route('alumnos.index')->with('success', $mensaje);
     }
