@@ -54,6 +54,16 @@ class AlumnoController extends Controller
         $alumno = \App\Models\Alumno::create($validated);
         $adminEmail = auth()->user()->email ?? config('mail.from.address');
         $mensaje = 'Alumno creado exitosamente.';
+        // Crear inscripción automáticamente
+        $profesor = \App\Models\Profesor::first();
+        \App\Models\Inscripcion::create([
+            'id_alumno' => $alumno->id_alumno,
+            'id_nivel' => $alumno->id_nivel,
+            'id_curso' => $alumno->id_curso,
+            'id_profesor' => $profesor ? $profesor->id_profesor : 1,
+            'id_sucursal' => $alumno->id_sucursal,
+            'fecha_inscripcion' => now(),
+        ]);
         if (!filter_var($alumno->email, FILTER_VALIDATE_EMAIL)) {
             $mensaje .= ' Advertencia: El email del alumno no es válido, no se enviaron credenciales.';
         } elseif (\App\Models\User::where('email', $alumno->email)->exists()) {
