@@ -72,6 +72,12 @@
                 <span>Gestión de profesores</span>
             </a>
         </li>
+        <li class="menu-item menu-item-static">
+            <a href="{{ route('notas.create') }}" class="menu-link">
+                <i class='bx bx-edit'></i>
+                <span>Ingresar punteos</span>
+            </a>
+        </li>
     </ul>
     <div class="letramod">
         <span>Reportes</span>
