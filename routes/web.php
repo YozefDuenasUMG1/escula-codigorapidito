@@ -109,6 +109,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::post('/admin/solicitudes-inscripcion/{id}/aceptar', [\App\Http\Controllers\SolicitudInscripcionController::class, 'aceptar'])->name('solicitudes-inscripcion.aceptar');
 });
 
+// Rutas para que los alumnos creen y envíen solicitudes de inscripción
+Route::middleware(['auth', 'role:alumno'])->group(function () {
+    Route::get('/solicitud-inscripcion', [App\Http\Controllers\SolicitudInscripcionController::class, 'create'])->name('solicitud-inscripcion.create');
+    Route::post('/solicitud-inscripcion', [App\Http\Controllers\SolicitudInscripcionController::class, 'store'])->name('solicitud-inscripcion.store');
+});
+
 // Eliminar o comentar el grupo de rutas con 'verified'
 // Route::middleware(['auth', 'verified'])->group(function () {
 //     // Aquí van las rutas protegidas que requieren email verificado
