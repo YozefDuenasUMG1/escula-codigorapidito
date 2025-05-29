@@ -18,7 +18,7 @@
             <select name="id_inscripcion" id="id_inscripcion" class="form-select" required>
                 <option value="">Seleccione una inscripción</option>
                 @foreach($inscripciones as $inscripcion)
-                    <option value="{{ $inscripcion->id_inscripcion }}">{{ $inscripcion->alumno ? $inscripcion->alumno->nombre : 'Sin alumno' }} - {{ $inscripcion->curso ? $inscripcion->curso->nombre : 'Sin curso' }} - {{ $inscripcion->nivel ? $inscripcion->nivel->nombre : 'Sin nivel' }} - {{ $inscripcion->sucursal ? $inscripcion->sucursal->nombre : 'Sin sucursal' }}</option>
+                    <option value="{{ $inscripcion->id_inscripcion }}">{{ $inscripcion->alumno ? $inscripcion->alumno->nombre : 'Sin alumno' }} | {{ $inscripcion->curso ? $inscripcion->curso->nombre : 'Sin curso' }} | {{ $inscripcion->nivel ? $inscripcion->nivel->nombre : 'Sin nivel' }} | {{ $inscripcion->sucursal ? $inscripcion->sucursal->nombre : 'Sin sucursal' }}</option>
                 @endforeach
             </select>
         </div>
@@ -37,6 +37,18 @@
 
 @push('styles')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    @media (max-width: 600px) {
+        .select2-container .select2-selection--single {
+            font-size: 14px;
+            padding: 8px 4px;
+        }
+        .select2-results__option {
+            white-space: pre-line;
+            font-size: 13px;
+        }
+    }
+</style>
 @endpush
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
