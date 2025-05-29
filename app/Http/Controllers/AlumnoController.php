@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Notifications\CredencialesUsuario;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AlumnoController extends Controller
 {
@@ -152,5 +153,15 @@ class AlumnoController extends Controller
     {
         $alumno = Auth::user()->alumno;
         return view('alumno.datos-inscripcion', compact('alumno'));
+    }
+
+    public function exportarDatosInscripcionPdf()
+    {
+        $alumno = Auth::user()->alumno;
+        if (!$alumno) {
+            return redirect()->back()->with('error', 'No tienes datos de inscripción para exportar.');
+        }
+        $pdf = Pdf::loadView('alumno.datos-inscripcion-pdf', compact('alumno'));
+        return $pdf->download('datos-inscripcion.pdf');
     }
 }

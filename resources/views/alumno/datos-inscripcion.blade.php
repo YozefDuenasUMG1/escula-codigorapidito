@@ -4,6 +4,9 @@
 <div class="container mt-4">
     <h2>Datos de inscripción</h2>
     @if($alumno)
+        <form action="{{ route('alumno.datos-inscripcion.pdf') }}" method="GET" class="mb-3">
+            <button type="submit" class="btn btn-danger">Exportar PDF</button>
+        </form>
         <ul class="list-group">
             <li class="list-group-item"><strong>Nombre:</strong> {{ $alumno->nombre }}</li>
             <li class="list-group-item"><strong>Email:</strong> {{ $alumno->email }}</li>

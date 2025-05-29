@@ -10,12 +10,12 @@
                 <span>Inicio</span>
             </a>
         </li>
-        <li class="menu-item menu-item-static">
+        {{-- <li class="menu-item menu-item-static">
             <a href="{{ route('alumnos.inscribir') }}" class="menu-link">
                 <i class='bx bx-user-plus'></i>
                 <span>Inscribirse</span>
             </a>
-        </li>
+        </li> --}}
         <li class="menu-item menu-item-static">
             <a href="{{ route('alumno.info') }}" class="menu-link">
                 <i class='bx bx-id-card'></i>
