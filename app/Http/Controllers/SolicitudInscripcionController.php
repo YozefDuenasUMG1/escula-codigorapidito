@@ -19,7 +19,7 @@ class SolicitudInscripcionController extends Controller
         $cursos = Curso::all();
         $niveles = Nivel::all();
         $user = Auth::user();
-        return view('alumno.solicitud-inscripcion-form', compact('sucursales', 'cursos', 'niveles', 'user'));
+        return view('alumno.solicitud-inscripcion', compact('sucursales', 'cursos', 'niveles', 'user'));
     }
 
     public function store(Request $request)
