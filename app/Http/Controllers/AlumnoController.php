@@ -206,4 +206,16 @@ class AlumnoController extends Controller
         $alumno->delete();
         return back()->with('success', 'Alumno y usuario eliminados correctamente.');
     }
+
+    public function punteos()
+    {
+        $alumno = auth()->user()->alumno;
+        $notas = collect();
+        if ($alumno) {
+            $notas = \App\Models\Nota::whereHas('inscripcion', function($q) use ($alumno) {
+                $q->where('id_alumno', $alumno->id_alumno);
+            })->with(['inscripcion.curso', 'inscripcion.nivel', 'inscripcion.sucursal'])->get();
+        }
+        return view('alumno.punteos', compact('notas'));
+    }
 }
