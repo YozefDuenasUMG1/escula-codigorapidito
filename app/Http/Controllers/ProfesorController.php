@@ -204,4 +204,13 @@ class ProfesorController extends Controller
         ]);
         return redirect()->route('dashboard.profesor')->with('success', 'Solicitud enviada correctamente. Un administrador revisará tu inscripción.');
     }
+
+    /**
+     * Mostrar información de inscripción del profesor autenticado
+     */
+    public function informacionInscripcion()
+    {
+        $profesor = \App\Models\Profesor::with(['sucursal', 'nivel'])->where('id_user', auth()->id())->firstOrFail();
+        return view('profesor.informacion-inscripcion', compact('profesor'));
+    }
 }

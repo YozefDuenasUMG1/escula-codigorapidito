@@ -69,6 +69,12 @@
             </a>
         </li>
         @endif
+        <li class="menu-item menu-item-static">
+            <a href="{{ route('profesor.informacion-inscripcion') }}" class="menu-link">
+                <i class='bx bx-id-card'></i>
+                <span>Información de inscripción</span>
+            </a>
+        </li>
     </ul>
     <div class="footer">
         <div class="user">
