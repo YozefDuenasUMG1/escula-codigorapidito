@@ -89,7 +89,6 @@ Route::get('/dashboard-profesor', [\App\Http\Controllers\ProfesorDashboardContro
 Route::middleware(['auth', 'role:alumno'])->prefix('alumno')->group(function () {
     Route::view('info', 'alumno.info')->name('alumno.info');
     Route::view('punteos', 'alumno.punteos')->name('alumno.punteos');
-    Route::view('cursos', 'alumno.cursos')->name('alumno.cursos');
     Route::get('datos-inscripcion', [\App\Http\Controllers\AlumnoController::class, 'datosInscripcion'])->name('alumno.datos-inscripcion');
     Route::get('datos-inscripcion/pdf', [\App\Http\Controllers\AlumnoController::class, 'exportarDatosInscripcionPdf'])->name('alumno.datos-inscripcion.pdf');
 });
@@ -97,7 +96,6 @@ Route::middleware(['auth', 'role:alumno'])->prefix('alumno')->group(function () 
 // Rutas para menú de Profesor
 Route::middleware(['auth', 'role:profesor'])->prefix('profesor')->group(function () {
     Route::view('gestion-alumnos', 'profesor.gestion-alumnos')->name('profesor.gestion-alumnos');
-    Route::view('cursos-niveles', 'profesor.cursos-niveles')->name('profesor.cursos-niveles');
     Route::view('ingresar-punteos', 'profesor.ingresar-punteos')->name('profesor.ingresar-punteos');
     Route::view('ingreso-alumno', 'profesor.ingreso-alumno')->name('profesor.ingreso-alumno');
     Route::view('gestion-alumno', 'profesor.gestion-alumno')->name('profesor.gestion-alumno');

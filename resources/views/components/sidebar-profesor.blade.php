@@ -1,3 +1,7 @@
+<div class="menu-btn sidebar-btn" id="sidebar-btn">
+    <i class='bx bx-menu'></i>
+    <i class='bx bx-x'></i>
+</div>
 <div class="sidebar" id="sidebar">
     <div class="brand">
         <img src="{{ asset('brand/CodigoIcon.jpg') }}" alt="logo">
@@ -8,12 +12,6 @@
             <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class='bx bx-home-alt-2'></i>
                 <span>Inicio</span>
-            </a>
-        </li>
-        <li class="menu-item menu-item-static">
-            <a href="{{ route('profesor.cursos-niveles') }}" class="menu-link">
-                <i class='bx bx-book'></i>
-                <span>Lista de cursos y niveles</span>
             </a>
         </li>
         <li class="menu-item menu-item-static">
@@ -35,31 +33,22 @@
             </a>
         </li>
         <li class="menu-item menu-item-static">
-            <a href="#" class="menu-link" data-bs-toggle="collapse" data-bs-target="#reportesSubmenu" aria-expanded="false" aria-controls="reportesSubmenu">
-                <i class='bx bx-bar-chart'></i>
-                <span>Reportes</span>
-                <i class='bx bx-chevron-down ms-auto'></i>
+            <a href="{{ route('reportes.ingreso_punteos') }}" class="menu-link">
+                <i class='bx bx-list-ul'></i>
+                <span>Ingreso de punteos</span>
             </a>
-            <ul class="collapse list-unstyled ps-3" id="reportesSubmenu">
-                <li>
-                    <a href="{{ route('reportes.ingreso_punteos') }}" class="menu-link">
-                        <i class='bx bx-list-ul'></i>
-                        <span>Ingreso de punteos</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('reportes.alumnos_por_grado') }}" class="menu-link">
-                        <i class='bx bx-bar-chart-square'></i>
-                        <span>Alumnos por grado</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('reportes.ingreso_alumnos_registro') }}" class="menu-link">
-                        <i class='bx bx-user-check'></i>
-                        <span>Ingreso alumnos registro</span>
-                    </a>
-                </li>
-            </ul>
+        </li>
+        <li class="menu-item menu-item-static">
+            <a href="{{ route('reportes.alumnos_por_grado') }}" class="menu-link">
+                <i class='bx bx-bar-chart-square'></i>
+                <span>Alumnos por grado</span>
+            </a>
+        </li>
+        <li class="menu-item menu-item-static">
+            <a href="{{ route('reportes.ingreso_alumnos_registro') }}" class="menu-link">
+                <i class='bx bx-user-check'></i>
+                <span>Ingreso alumnos registro</span>
+            </a>
         </li>
         @if(!auth()->user()->profesor)
         <li class="menu-item menu-item-static">

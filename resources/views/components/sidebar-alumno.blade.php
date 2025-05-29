@@ -1,3 +1,7 @@
+<div class="menu-btn sidebar-btn" id="sidebar-btn">
+    <i class='bx bx-menu'></i>
+    <i class='bx bx-x'></i>
+</div>
 <div class="sidebar" id="sidebar">
     <div class="brand">
         <img src="{{ asset('brand/CodigoIcon.jpg') }}" alt="logo">
@@ -32,12 +36,6 @@
             <a href="{{ route('alumno.punteos') }}" class="menu-link">
                 <i class='bx bx-list-ol'></i>
                 <span>Mis punteos</span>
-            </a>
-        </li>
-        <li class="menu-item menu-item-static">
-            <a href="{{ route('alumno.cursos') }}" class="menu-link">
-                <i class='bx bx-book'></i>
-                <span>Lista de cursos</span>
             </a>
         </li>
         <li class="menu-item menu-item-static">
