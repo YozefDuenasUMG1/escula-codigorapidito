@@ -25,6 +25,10 @@ class SolicitudInscripcionController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
+        // Validar si ya está inscrito
+        if ($user->alumno) {
+            return redirect()->back()->with('error', 'Ya estás inscrito. No puedes enviar otra solicitud.');
+        }
         $validated = $request->validate([
             'numero' => 'required|string|max:8',
             'direccion' => 'required|string',
