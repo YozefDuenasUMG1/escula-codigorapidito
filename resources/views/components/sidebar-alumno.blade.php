@@ -34,6 +34,12 @@
                 <span>Lista de cursos</span>
             </a>
         </li>
+        <li class="menu-item menu-item-static">
+            <a href="{{ route('solicitud-inscripcion.create') }}" class="menu-link">
+                <i class='bx bx-envelope'></i>
+                <span>Solicitar inscripción</span>
+            </a>
+        </li>
     </ul>
     <div class="footer">
         <div class="user">

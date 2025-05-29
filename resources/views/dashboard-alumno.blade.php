@@ -25,6 +25,12 @@
                     <!-- Otros datos -->
                 </ul>
                 <div class="mt-4 alert alert-info">Recuerda revisar tus notas y comunicarte con tu profesor si tienes dudas.</div>
+                @if(Auth::user()->role === 'alumno' && !Auth::user()->alumno)
+                    <div class="alert alert-warning">
+                        <strong>¿Aún no estás inscrito?</strong> Rellena este formulario para solicitar tu inscripción.
+                    </div>
+                    @include('alumno.solicitud-inscripcion-form')
+                @endif
             </div>
         </div>
     </div>

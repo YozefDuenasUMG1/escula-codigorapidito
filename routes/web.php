@@ -105,6 +105,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/gestion-usuarios', [\App\Http\Controllers\UserController::class, 'index'])->name('usuarios.index');
     Route::get('/usuarios/{id}/editar', [\App\Http\Controllers\UserController::class, 'edit'])->name('usuarios.edit');
     Route::put('/usuarios/{id}', [\App\Http\Controllers\UserController::class, 'update'])->name('usuarios.update');
+    Route::get('/admin/solicitudes-inscripcion', [\App\Http\Controllers\SolicitudInscripcionController::class, 'index'])->name('solicitudes-inscripcion.index');
+    Route::post('/admin/solicitudes-inscripcion/{id}/aceptar', [\App\Http\Controllers\SolicitudInscripcionController::class, 'aceptar'])->name('solicitudes-inscripcion.aceptar');
 });
 
 // Eliminar o comentar el grupo de rutas con 'verified'

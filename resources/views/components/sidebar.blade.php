@@ -130,6 +130,17 @@
             </a>
         </li>
     </ul>
+    <div class="letramod">
+        <span>Administración</span>
+    </div>
+    <ul class="menu">
+        <li class="menu-item menu-item-static">
+            <a href="{{ route('solicitudes-inscripcion.index') }}" class="menu-link">
+                <i class='bx bx-envelope'></i>
+                <span>Solicitudes de inscripción</span>
+            </a>
+        </li>
+    </ul>
     <div class="footer">
         
         <div class="user">

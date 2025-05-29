@@ -58,4 +58,9 @@ class User extends Authenticatable
             'id_inscripcion'  // Local key on Inscripcion
         );
     }
+
+    public function alumno()
+    {
+        return $this->hasOne(\App\Models\Alumno::class, 'email', 'email');
+    }
 }
