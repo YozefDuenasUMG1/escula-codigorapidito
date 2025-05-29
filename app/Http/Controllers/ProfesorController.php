@@ -213,4 +213,14 @@ class ProfesorController extends Controller
         $profesor = \App\Models\Profesor::with(['sucursal', 'nivel'])->where('id_user', auth()->id())->firstOrFail();
         return view('profesor.informacion-inscripcion', compact('profesor'));
     }
+
+    /**
+     * Exportar información de inscripción del profesor autenticado a PDF
+     */
+    public function exportarInformacionInscripcionPdf()
+    {
+        $profesor = \App\Models\Profesor::with(['sucursal', 'nivel'])->where('id_user', auth()->id())->firstOrFail();
+        $pdf = \PDF::loadView('profesor.informacion-inscripcion-pdf', compact('profesor'));
+        return $pdf->download('informacion_inscripcion_profesor.pdf');
+    }
 }

@@ -140,3 +140,4 @@ Route::middleware(['auth', 'role:profesor'])->group(function () {
 
 // Información de inscripción del profesor
 Route::middleware(['auth', 'role:profesor'])->get('/profesor/informacion-inscripcion', [\App\Http\Controllers\ProfesorController::class, 'informacionInscripcion'])->name('profesor.informacion-inscripcion');
+Route::middleware(['auth', 'role:profesor'])->get('/profesor/informacion-inscripcion/pdf', [\App\Http\Controllers\ProfesorController::class, 'exportarInformacionInscripcionPdf'])->name('profesor.informacion-inscripcion.pdf');
