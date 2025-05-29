@@ -14,6 +14,7 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
+                                <th>Profesor</th>
                                 <th>Profesor Designado</th>
                                 <th>Asignar/Editar Profesor</th>
                                 <th>Acciones</th>
@@ -25,6 +26,9 @@
                                 <td>{{ $curso->id_curso }}</td>
                                 <td>{{ $curso->nombre }}</td>
                                 <td>{{ $curso->descripcion }}</td>
+                                <td>
+                                    {{ $curso->profesor->nombre ?? 'Sin asignar' }}
+                                </td>
                                 <td>
                                     @if($curso->profesor)
                                         {{ $curso->profesor->nombre }}

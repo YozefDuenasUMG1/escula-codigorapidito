@@ -13,7 +13,7 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
-                                <th>ID Profesor</th>
+                                <th>Profesor</th>
                                 <th>ID Nivel</th>
                                 <th>Fecha de Creación</th>
                                 <th>Última Actualización</th>
@@ -26,7 +26,7 @@
                                 <td>{{ $curso->id_curso }}</td>
                                 <td>{{ $curso->nombre }}</td>
                                 <td>{{ $curso->descripcion }}</td>
-                                <td>{{ $curso->id_profesor }}</td>
+                                <td>{{ $curso->profesor->nombre ?? 'Sin asignar' }}</td>
                                 <td>{{ $curso->id_nivel }}</td>
                                 <td>{{ $curso->created_at }}</td>
                                 <td>{{ $curso->updated_at }}</td>
