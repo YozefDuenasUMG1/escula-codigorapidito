@@ -34,11 +34,22 @@ class NotaController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'id_inscripcion' => 'required|exists:inscripciones,id_inscripcion',
+            'id_alumno' => 'required|exists:alumnos,id_alumno',
             'punteo' => 'required|integer|min:0|max:100',
             'observacion' => 'nullable|string',
         ]);
-        Nota::create($validated);
+        // Buscar la inscripción más reciente del alumno
+        $inscripcion = \App\Models\Inscripcion::where('id_alumno', $validated['id_alumno'])
+            ->orderByDesc('fecha_inscripcion')
+            ->first();
+        if (!$inscripcion) {
+            return redirect()->back()->with('error', 'El alumno seleccionado no tiene inscripción.');
+        }
+        \App\Models\Nota::create([
+            'id_inscripcion' => $inscripcion->id_inscripcion,
+            'punteo' => $validated['punteo'],
+            'observacion' => $validated['observacion'] ?? null,
+        ]);
         return redirect()->route('notas.index')->with('success', 'Nota creada exitosamente.');
     }
 
