@@ -6,6 +6,12 @@
             <div class="p-6 text-gray-900">
                 <h3>Bienvenido, {{ Auth::user()->name }}</h3>
                 <p>Este es tu panel de profesor. Aquí puedes gestionar tus cursos y alumnos.</p>
+                @if(!Auth::user()->profesor)
+                    <div class="alert alert-warning mt-3">
+                        <strong>¡Atención!</strong> Aún no estás inscrito como profesor. Para poder gestionar cursos y alumnos, primero debes solicitar tu inscripción.
+                        <a href="{{ route('solicitud-inscripcion-profesor.create') }}" class="btn btn-primary btn-sm mt-2">Solicitar inscripción como profesor</a>
+                    </div>
+                @endif
                 <hr class="my-4">
                 <h4>Mis cursos a cargo</h4>
                 <ul>
