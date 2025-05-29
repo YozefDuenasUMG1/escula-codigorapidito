@@ -128,3 +128,6 @@ Route::middleware(['auth', 'role:alumno'])->group(function () {
 Route::get('/añadir-profesor', [App\Http\Controllers\ProfesorController::class, 'create'])->name('profesores.create');
 // Ruta para gestión de profesores
 Route::get('/gestion-profesores', [ProfesorController::class, 'index'])->name('profesores.gestion');
+
+// Ruta visual de todos los cursos y niveles
+Route::get('/cursos-lista', [\App\Http\Controllers\CursoController::class, 'verListaVisual'])->name('cursos.lista.visual');

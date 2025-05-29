@@ -29,6 +29,12 @@
             </a>
         </li>
         <li class="menu-item menu-item-static">
+            <a href="{{ route('cursos.lista.visual') }}" class="menu-link">
+                <i class='bx bx-show'></i>
+                <span>Ver todos los cursos</span>
+            </a>
+        </li>
+        <li class="menu-item menu-item-static">
             <a href="#" class="menu-link" data-bs-toggle="collapse" data-bs-target="#reportesSubmenu" aria-expanded="false" aria-controls="reportesSubmenu">
                 <i class='bx bx-bar-chart'></i>
                 <span>Reportes</span>

@@ -93,4 +93,13 @@ class CursoController extends Controller
         $profesores = \App\Models\Profesor::all();
         return view('gestion-cursos', compact('cursos', 'niveles', 'profesores'));
     }
+
+    /**
+     * Vista solo visual de todos los cursos y sus niveles
+     */
+    public function verListaVisual()
+    {
+        $cursos = \App\Models\Curso::with('nivel')->get();
+        return view('cursos-lista', compact('cursos'));
+    }
 }

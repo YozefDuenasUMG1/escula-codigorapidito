@@ -46,6 +46,12 @@
                 <span>Solicitar inscripción</span>
             </a>
         </li>
+        <li class="menu-item menu-item-static">
+            <a href="{{ route('cursos.lista.visual') }}" class="menu-link">
+                <i class='bx bx-show'></i>
+                <span>Ver todos los cursos</span>
+            </a>
+        </li>
     </ul>
     <div class="footer">
         <div class="user">

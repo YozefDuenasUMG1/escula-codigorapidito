@@ -14,7 +14,8 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
-                                <th>Profesor</th>
+                                <th>Profesor Designado</th>
+                                <th>Asignar/Editar Profesor</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -24,6 +25,13 @@
                                 <td>{{ $curso->id_curso }}</td>
                                 <td>{{ $curso->nombre }}</td>
                                 <td>{{ $curso->descripcion }}</td>
+                                <td>
+                                    @if($curso->profesor)
+                                        {{ $curso->profesor->nombre }}
+                                    @else
+                                        <span class="text-muted">Sin asignar</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <form action="{{ route('cursos.update', $curso->id_curso) }}" method="POST" style="display:inline-block; min-width: 180px;">
                                         @csrf
