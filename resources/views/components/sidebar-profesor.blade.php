@@ -21,12 +21,6 @@
             </a>
         </li>
         <li class="menu-item menu-item-static">
-            <a href="/inscribir-alumno" class="menu-link">
-                <i class='bx bx-user-plus'></i>
-                <span>Inscripción de alumno</span>
-            </a>
-        </li>
-        <li class="menu-item menu-item-static">
             <a href="{{ route('cursos.lista.visual') }}" class="menu-link">
                 <i class='bx bx-show'></i>
                 <span>Ver todos los cursos</span>
@@ -51,12 +45,6 @@
             </a>
         </li>
         @if(!auth()->user()->profesor)
-        <li class="menu-item menu-item-static">
-            <a href="{{ route('solicitud-inscripcion-profesor.create') }}" class="menu-link">
-                <i class='bx bx-envelope'></i>
-                <span>Solicitar inscripción como profesor</span>
-            </a>
-        </li>
         @endif
         <li class="menu-item menu-item-static">
             <a href="{{ route('profesor.informacion-inscripcion') }}" class="menu-link">
