@@ -18,9 +18,13 @@
             <select name="id_alumno" id="id_alumno" class="form-select" required>
                 <option value="">Seleccione un alumno</option>
                 @foreach($alumnos as $alumno)
-                    <option value="{{ $alumno->id_alumno }}">{{ $alumno->nombre }}</option>
+                    <option value="{{ $alumno->id_alumno }}" data-curso="{{ $alumno->curso->nombre ?? '' }}">{{ $alumno->nombre }}</option>
                 @endforeach
             </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Curso</label>
+            <input type="text" id="curso_nombre" class="form-control" value="" readonly>
         </div>
         <div class="mb-3">
             <label for="punteo" class="form-label">Punteo</label>
@@ -58,6 +62,11 @@
             width: '100%',
             placeholder: 'Seleccione un alumno',
             allowClear: true
+        });
+        $('#id_alumno').on('change', function() {
+            var selected = $(this).find('option:selected');
+            var curso = selected.data('curso') || '';
+            $('#curso_nombre').val(curso);
         });
     });
 </script>
