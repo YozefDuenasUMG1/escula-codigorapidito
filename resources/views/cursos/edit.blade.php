@@ -12,22 +12,7 @@
                     <form action="{{ route('cursos.update', $curso->id_curso) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" name="nombre" class="form-control" value="{{ $curso->nombre }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="id_nivel" class="form-label">Nivel</label>
-                            <select name="id_nivel" class="form-control" required>
-                                @foreach($niveles as $nivel)
-                                    <option value="{{ $nivel->id_nivel }}" @if($curso->id_nivel == $nivel->id_nivel) selected @endif>{{ $nivel->nombre }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="descripcion" class="form-label">Descripción</label>
-                            <textarea name="descripcion" class="form-control" required>{{ $curso->descripcion }}</textarea>
-                        </div>
+                        @include('cursos.formulario', ['curso' => $curso, 'niveles' => $niveles, 'profesores' => $profesores])
                         <button type="submit" class="btn btn-success">Actualizar Curso</button>
                         <a href="{{ route('cursos.gestion') }}" class="btn btn-secondary">Cancelar</a>
                     </form>

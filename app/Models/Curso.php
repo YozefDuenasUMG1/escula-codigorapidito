@@ -9,7 +9,7 @@ class Curso extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'descripcion'];
+    protected $fillable = ['nombre', 'descripcion', 'id_profesor', 'id_nivel'];
     protected $primaryKey = 'id_curso';
 
     public function inscripciones()

@@ -22,7 +22,8 @@ class CursoController extends Controller
     public function create()
     {
         $niveles = \App\Models\Nivel::all();
-        return view('cursos.create', compact('niveles'));
+        $profesores = \App\Models\Profesor::all();
+        return view('cursos.create', compact('niveles', 'profesores'));
     }
 
     /**
@@ -33,8 +34,10 @@ class CursoController extends Controller
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
+            'id_profesor' => 'required|exists:profesores,id_profesor',
+            'id_nivel' => 'required|exists:niveles,id_nivel',
         ]);
-        Curso::create($validated);
+        \App\Models\Curso::create($validated);
         return redirect()->route('cursos.index')->with('success', 'Curso creado exitosamente.');
     }
 
@@ -53,7 +56,8 @@ class CursoController extends Controller
     {
         $curso = \App\Models\Curso::findOrFail($id);
         $niveles = \App\Models\Nivel::all();
-        return view('cursos.edit', compact('curso', 'niveles'));
+        $profesores = \App\Models\Profesor::all();
+        return view('cursos.edit', compact('curso', 'niveles', 'profesores'));
     }
 
     /**
@@ -61,10 +65,12 @@ class CursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $curso = Curso::findOrFail($id);
+        $curso = \App\Models\Curso::findOrFail($id);
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
+            'id_profesor' => 'required|exists:profesores,id_profesor',
+            'id_nivel' => 'required|exists:niveles,id_nivel',
         ]);
         $curso->update($validated);
         return redirect()->route('cursos.index')->with('success', 'Curso actualizado exitosamente.');
