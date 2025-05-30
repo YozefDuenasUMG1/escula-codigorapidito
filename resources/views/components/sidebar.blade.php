@@ -14,10 +14,6 @@
         <span>Administrador</span>
     </div>
     <div class="menu-container">
-        <div class="search">
-            <i class='bx bx-search-alt'></i>
-            <input type="search" placeholder="Buscar...">
-        </div>
     </div>
     <ul class="menu">
         <li class="menu-item menu-item-static">
