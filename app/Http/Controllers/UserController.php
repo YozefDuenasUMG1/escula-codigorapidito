@@ -89,6 +89,14 @@ class UserController extends Controller
     public function destroy($id)
     {
         $usuario = User::findOrFail($id);
+        // Eliminar registro de profesor si existe
+        \App\Models\Profesor::where('id_user', $usuario->id)->delete();
+        // Eliminar registro de alumno y sus inscripciones si existe
+        $alumno = \App\Models\Alumno::where('id_user', $usuario->id)->first();
+        if ($alumno) {
+            \App\Models\Inscripcion::where('id_alumno', $alumno->id_alumno)->delete();
+            $alumno->delete();
+        }
         $usuario->delete();
         return back()->with('success', 'Usuario eliminado correctamente.');
     }
