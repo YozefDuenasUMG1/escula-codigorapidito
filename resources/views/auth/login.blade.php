@@ -11,11 +11,11 @@
     <div class="container">
         <!-- Añade esto justo después de abrir el div.container -->
         <div class="mobile-toggle-buttons d-md-none">
-            <button class="mobile-toggle-button active" data-target="sign-in">Iniciar sesión</button>
-            <button class="mobile-toggle-button" data-target="sign-up">Registrarse</button>
+            <button class="mobile-toggle-button active" data-target="sign-in-form">Iniciar sesión</button>
+            <button class="mobile-toggle-button" data-target="sign-up-form">Registrarse</button>
         </div>
-        <!-- Modifica los formularios para añadir clases de identificación -->
-        <div class="container-form active" id="sign-in">
+        <!-- Modifica los formularios para añadir clases de identificación y nuevos IDs -->
+        <div class="container-form sign-in active" id="sign-in-form">
             <form method="POST" action="{{ route('login') }}" id="loginForm" aria-label="Formulario de inicio de sesión">
                 @csrf
                 <h2>Inicio de sesión</h2>
@@ -58,7 +58,7 @@
                 </button>
             </form>
         </div>
-        <div class="container-form" id="sign-up">
+        <div class="container-form sign-up" id="sign-up-form">
             <form class="sign-up" method="POST" action="{{ route('register') }}">
                 @csrf
                 <h2>Registrarse</h2>
@@ -280,10 +280,13 @@
                 top: 0;
                 z-index: 100;
             }
-            /* Asegura que los formularios ocupen todo el alto disponible */
-            .container-form.active {
-                flex: 1;
+            .container-form {
                 overflow-y: auto;
+                height: calc(100vh - 120px); /* Ajusta según sea necesario */
+            }
+            .container-input {
+                width: 100%;
+                max-width: 100%;
             }
         }
     </style>

@@ -1,34 +1,50 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Selectores
-    const mobileToggleButtons = document.querySelectorAll('.mobile-toggle-button');
+    // Elementos del DOM
     const container = document.querySelector(".container");
     const btnSignIn = document.getElementById("btn-sign-in");
     const btnSignUp = document.getElementById("btn-sign-up");
-    
-    // Función para alternar entre formularios en mobile
+    const mobileToggleButtons = document.querySelectorAll('.mobile-toggle-button');
+    const signInForm = document.getElementById("sign-in-form");
+    const signUpForm = document.getElementById("sign-up-form");
+
+    // Función para alternar formularios en mobile
+    function toggleMobileForms(target) {
+        // Remover active de todos los botones
+        mobileToggleButtons.forEach(btn => btn.classList.remove('active'));
+        // Ocultar todos los formularios
+        document.querySelectorAll('.container-form').forEach(form => {
+            form.classList.remove('active');
+        });
+        // Activar el botón y formulario correspondiente
+        if (target === 'sign-in') {
+            document.querySelector('[data-target="sign-in"]').classList.add('active');
+            signInForm.classList.add('active');
+        } else {
+            document.querySelector('[data-target="sign-up"]').classList.add('active');
+            signUpForm.classList.add('active');
+        }
+    }
+
+    // Configurar eventos para mobile
     function setupMobileToggle() {
         mobileToggleButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Remover clase active de todos los botones
-                mobileToggleButtons.forEach(btn => btn.classList.remove('active'));
-                // Añadir clase active al botón clickeado
-                this.classList.add('active');
-                // Ocultar todos los formularios
-                document.querySelectorAll('.container-form').forEach(form => {
-                    form.classList.remove('active');
-                });
-                // Mostrar el formulario correspondiente
-                const targetForm = document.getElementById(this.dataset.target);
-                targetForm.classList.add('active');
+                toggleMobileForms(this.dataset.target);
             });
         });
     }
 
-    // Verificar el tamaño de pantalla y configurar los eventos
+    // Verificar el tamaño de pantalla y configurar eventos
     function checkScreenSize() {
         if (window.innerWidth <= 768) {
+            // Comportamiento para mobile
             setupMobileToggle();
+            // Asegurarse de que solo el formulario de login está visible al cargar
+            if (!signInForm.classList.contains('active')) {
+                toggleMobileForms('sign-in');
+            }
         } else {
+            // Comportamiento para desktop
             if (btnSignIn && btnSignUp) {
                 btnSignIn.addEventListener("click", () => {
                     container.classList.remove("toggle");
@@ -40,12 +56,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Ejecutar al cargar y al redimensionar
+    // Inicializar y configurar el resize listener
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
 
     // Validación para el formulario de login
-    const signInForm = document.querySelector('.sign-in');
     if (signInForm) {
         signInForm.addEventListener('submit', function(e) {
             let valid = true;
@@ -70,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Validación para el formulario de registro
-    const signUpForm = document.querySelector('.sign-up');
     if (signUpForm) {
         signUpForm.addEventListener('submit', function(e) {
             let valid = true;
