@@ -159,25 +159,19 @@ body{
         height: auto;
         border-radius: 0;
         box-shadow: none;
+        padding: 0;
+        background: white;
     }
     .container-form {
         width: 100%;
         min-height: 350px;
         height: auto;
         padding: 20px 0;
-        display: none;
-    }
-    .container-form.active {
         display: flex;
+        background: white;
     }
     .container-welcome {
         display: none;
-    }
-    .mobile-toggle-btns {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 20px;
     }
     .container-input {
         width: 100%;
@@ -202,5 +196,6 @@ body{
     .container-form form {
         width: 100%;
         padding: 10px 0;
+        background: white;
     }
 }
