@@ -9,7 +9,11 @@
 </head>
 <body>
     <div class="container">
-        <div class="container-form">
+        <div class="mobile-toggle-btns" style="display:none">
+            <button type="button" id="mobile-login-btn" class="button">Iniciar sesión</button>
+            <button type="button" id="mobile-register-btn" class="button" style="background:#3AA8AD;">Registrarse</button>
+        </div>
+        <div class="container-form sign-in active">
             <form method="POST" action="{{ route('login') }}" id="loginForm" aria-label="Formulario de inicio de sesión">
                 @csrf
                 <h2>Inicio de sesión</h2>
@@ -52,7 +56,7 @@
                 </button>
             </form>
         </div>
-        <div class="container-form">
+        <div class="container-form sign-up">
             <form class="sign-up" method="POST" action="{{ route('register') }}">
                 @csrf
                 <h2>Registrarse</h2>
@@ -147,6 +151,36 @@
             spinner.classList.remove('d-none');
             btnText.textContent = 'Ingresando...';
         });
+        // Adaptación mobile: mostrar botones y alternar formularios
+        function isMobile() {
+            return window.innerWidth <= 600;
+        }
+        function updateMobileView() {
+            const mobileBtns = document.querySelector('.mobile-toggle-btns');
+            const signInForm = document.querySelector('.container-form.sign-in');
+            const signUpForm = document.querySelector('.container-form.sign-up');
+            if (isMobile()) {
+                mobileBtns.style.display = 'flex';
+                if (!signInForm.classList.contains('active') && !signUpForm.classList.contains('active')) {
+                    signInForm.classList.add('active');
+                    signUpForm.classList.remove('active');
+                }
+            } else {
+                mobileBtns.style.display = 'none';
+                signInForm.classList.add('active');
+                signUpForm.classList.remove('active');
+            }
+        }
+        document.getElementById('mobile-login-btn').addEventListener('click', function() {
+            document.querySelector('.container-form.sign-in').classList.add('active');
+            document.querySelector('.container-form.sign-up').classList.remove('active');
+        });
+        document.getElementById('mobile-register-btn').addEventListener('click', function() {
+            document.querySelector('.container-form.sign-in').classList.remove('active');
+            document.querySelector('.container-form.sign-up').classList.add('active');
+        });
+        window.addEventListener('resize', updateMobileView);
+        window.addEventListener('DOMContentLoaded', updateMobileView);
     </script>
     <style>
         /* Accesibilidad: alto contraste para errores */

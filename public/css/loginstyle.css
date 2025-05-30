@@ -152,6 +152,33 @@ body{
 }
 
 @media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        width: 100vw;
+        min-height: 100vh;
+        height: auto;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .container-form {
+        width: 100%;
+        min-height: 350px;
+        height: auto;
+        padding: 20px 0;
+        display: none;
+    }
+    .container-form.active {
+        display: flex;
+    }
+    .container-welcome {
+        display: none;
+    }
+    .mobile-toggle-btns {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
     .container-input {
         width: 100%;
         max-width: 100%;
