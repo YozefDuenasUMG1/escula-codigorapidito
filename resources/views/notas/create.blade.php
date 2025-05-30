@@ -18,15 +18,13 @@
             <select name="id_alumno" id="id_alumno" class="form-select" required>
                 <option value="">Seleccione un alumno</option>
                 @foreach($alumnos as $alumno)
-                    <option value="{{ $alumno->id_alumno }}" data-inscripciones='@json($alumno->inscripciones->map(function($i){return ["id_inscripcion"=>$i->id_inscripcion,"curso"=>$i->curso->nombre??"","id_curso"=>$i->id_curso];}))'>{{ $alumno->nombre }}</option>
+                    <option value="{{ $alumno->id_alumno }}" data-curso="{{ $alumno->curso->nombre ?? '' }}">{{ $alumno->nombre }}</option>
                 @endforeach
             </select>
         </div>
         <div class="mb-3">
-            <label for="id_curso" class="form-label">Curso</label>
-            <select name="id_curso" id="id_curso" class="form-select" required disabled>
-                <option value="">Seleccione un curso</option>
-            </select>
+            <label class="form-label">Curso</label>
+            <input type="text" id="curso_nombre" class="form-control" value="" readonly>
         </div>
         <div class="mb-3">
             <label for="punteo" class="form-label">Punteo</label>
@@ -65,26 +63,10 @@
             placeholder: 'Seleccione un alumno',
             allowClear: true
         });
-        $('#id_curso').select2({
-            width: '100%',
-            placeholder: 'Seleccione un curso',
-            allowClear: true
-        });
         $('#id_alumno').on('change', function() {
             var selected = $(this).find('option:selected');
-            var inscripciones = selected.data('inscripciones') || [];
-            var $curso = $('#id_curso');
-            $curso.empty();
-            $curso.append('<option value="">Seleccione un curso</option>');
-            if(inscripciones.length > 0){
-                inscripciones.forEach(function(i){
-                    $curso.append('<option value="'+i.id_inscripcion+'">'+i.curso+'</option>');
-                });
-                $curso.prop('disabled', false);
-            }else{
-                $curso.prop('disabled', true);
-            }
-            $curso.val('').trigger('change');
+            var curso = selected.data('curso') || '';
+            $('#curso_nombre').val(curso);
         });
     });
 </script>
