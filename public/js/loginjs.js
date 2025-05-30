@@ -1,53 +1,42 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Selectores
+    const mobileToggleButtons = document.querySelectorAll('.mobile-toggle-button');
     const container = document.querySelector(".container");
     const btnSignIn = document.getElementById("btn-sign-in");
     const btnSignUp = document.getElementById("btn-sign-up");
-    const mobileToggleButtons = document.querySelectorAll('.mobile-toggle-button');
-
-    // Función para manejar el toggle en desktop
-    function handleDesktopToggle() {
-        if (window.innerWidth > 768) {
-            btnSignIn.addEventListener("click", () => {
-                container.classList.remove("toggle");
-            });
-            btnSignUp.addEventListener("click", () => {
-                container.classList.add("toggle");
-            });
-        }
-    }
-
-    // Función para manejar el toggle en mobile
-    function handleMobileToggle() {
-        if (window.innerWidth <= 768) {
-            mobileToggleButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Remover active de todos los botones
-                    mobileToggleButtons.forEach(btn => btn.classList.remove('active'));
-                    // Añadir active al botón clickeado
-                    this.classList.add('active');
-                    
-                    // Ocultar todos los formularios
-                    document.querySelectorAll('.container-form').forEach(form => {
-                        form.classList.remove('active');
-                    });
-                    
-                    // Mostrar el formulario correspondiente
-                    const target = this.getAttribute('data-target');
-                    document.getElementById(target).classList.add('active');
+    
+    // Función para alternar entre formularios en mobile
+    function setupMobileToggle() {
+        mobileToggleButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remover clase active de todos los botones
+                mobileToggleButtons.forEach(btn => btn.classList.remove('active'));
+                // Añadir clase active al botón clickeado
+                this.classList.add('active');
+                // Ocultar todos los formularios
+                document.querySelectorAll('.container-form').forEach(form => {
+                    form.classList.remove('active');
                 });
+                // Mostrar el formulario correspondiente
+                const targetForm = document.getElementById(this.dataset.target);
+                targetForm.classList.add('active');
             });
-        }
+        });
     }
 
-    // Verificar el tamaño de pantalla al cargar
+    // Verificar el tamaño de pantalla y configurar los eventos
     function checkScreenSize() {
         if (window.innerWidth <= 768) {
-            // Mobile
-            container.classList.remove("toggle");
-            handleMobileToggle();
+            setupMobileToggle();
         } else {
-            // Desktop
-            handleDesktopToggle();
+            if (btnSignIn && btnSignUp) {
+                btnSignIn.addEventListener("click", () => {
+                    container.classList.remove("toggle");
+                });
+                btnSignUp.addEventListener("click", () => {
+                    container.classList.add("toggle");
+                });
+            }
         }
     }
 
