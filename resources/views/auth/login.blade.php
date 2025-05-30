@@ -9,13 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- Añade esto justo después de abrir el div.container -->
-        <div class="mobile-toggle-buttons d-md-none">
-            <button class="mobile-toggle-button active" data-target="sign-in-form">Iniciar sesión</button>
-            <button class="mobile-toggle-button" data-target="sign-up-form">Registrarse</button>
-        </div>
-        <!-- Modifica los formularios para añadir clases de identificación y nuevos IDs -->
-        <div class="container-form sign-in active" id="sign-in-form">
+        <div class="container-form">
             <form method="POST" action="{{ route('login') }}" id="loginForm" aria-label="Formulario de inicio de sesión">
                 @csrf
                 <h2>Inicio de sesión</h2>
@@ -58,7 +52,7 @@
                 </button>
             </form>
         </div>
-        <div class="container-form sign-up" id="sign-up-form">
+        <div class="container-form">
             <form class="sign-up" method="POST" action="{{ route('register') }}">
                 @csrf
                 <h2>Registrarse</h2>
@@ -122,7 +116,7 @@
             </div>
             <div class="welcome-sign-in welcome">
                 <h3>¡Hola!</h3>
-                <p>Regístrese con sus datos para ingresar a la Academia Código Rapidito</p>
+                <p>Regístrese con sus datos para ingresar a la Academia Código Rapidito</P>
                 <button class="button" id="btn-sign-in">Iniciar sesión</button>
             </div>
         </div>
@@ -152,20 +146,6 @@
             btn.disabled = true;
             spinner.classList.remove('d-none');
             btnText.textContent = 'Ingresando...';
-        });
-        // Script para alternar entre formularios en vista móvil
-        document.querySelectorAll('.mobile-toggle-button').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var targetForm = this.getAttribute('data-target');
-                document.querySelectorAll('.container-form').forEach(function(form) {
-                    form.classList.remove('active');
-                });
-                document.getElementById(targetForm).classList.add('active');
-                document.querySelectorAll('.mobile-toggle-button').forEach(function(btn) {
-                    btn.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
         });
     </script>
     <style>
@@ -241,53 +221,6 @@
             background: linear-gradient(90deg, #2D8C8C 0%, #3AB397 100%);
             box-shadow: 0 4px 16px 0 rgba(58,179,151,0.18);
             transform: translateY(-2px) scale(1.03);
-        }
-        /* Estilos para los botones de navegación móvil */
-        .mobile-toggle-buttons {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-        }
-        .mobile-toggle-button {
-            background: none;
-            border: 2px solid #3AB397;
-            border-radius: 8px;
-            color: #3AB397;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            padding: 0.7rem 1.5rem;
-            margin: 0 0.5rem;
-            cursor: pointer;
-            transition: background 0.2s, color 0.2s;
-        }
-        .mobile-toggle-button.active {
-            background: #3AB397;
-            color: #fff;
-        }
-        .mobile-toggle-button:hover {
-            background: rgba(58,179,151,0.1);
-        }
-        /* Oculta los botones de toggle mobile en desktop */
-        .mobile-toggle-buttons {
-            display: none;
-        }
-        @media (max-width: 768px) {
-            .mobile-toggle-buttons {
-                display: flex;
-                padding: 15px;
-                background: white;
-                position: sticky;
-                top: 0;
-                z-index: 100;
-            }
-            .container-form {
-                overflow-y: auto;
-                height: calc(100vh - 120px); /* Ajusta según sea necesario */
-            }
-            .container-input {
-                width: 100%;
-                max-width: 100%;
-            }
         }
     </style>
     @if (session('status'))
