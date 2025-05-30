@@ -32,7 +32,7 @@ body{
     align-items: center;
 }
 .container-form:nth-child(2) {
-    transform: translateX(100%);
+    transform: none !important;
 }
 .container-form form{
     height: 100%;
@@ -99,7 +99,7 @@ body{
 /Animacion pitera para el form xd/
 
 .sign-up{
-    transform: translateX(-100%);
+    transform: none !important;
 }
 .container.toggle .sign-in{
     transform: translateX(100%);

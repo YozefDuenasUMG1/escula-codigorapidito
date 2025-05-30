@@ -159,20 +159,6 @@
         window.addEventListener('resize', toggleMobileSignupButton);
         document.addEventListener('DOMContentLoaded', function() {
             toggleMobileSignupButton();
-            // Alternar formulario de inicio de sesión y registro
-            document.getElementById('btn-sign-up').addEventListener('click', function() {
-                document.querySelector('.container-form:nth-child(1)').style.display = 'none';
-                document.querySelector('.container-form:nth-child(2)').style.display = 'block';
-            });
-            document.getElementById('btn-sign-in').addEventListener('click', function() {
-                document.querySelector('.container-form:nth-child(1)').style.display = 'block';
-                document.querySelector('.container-form:nth-child(2)').style.display = 'none';
-            });
-            // Redirigir botón móvil a registro
-            document.getElementById('mobile-signup-btn').addEventListener('click', function() {
-                document.querySelector('.container-form:nth-child(1)').style.display = 'none';
-                document.querySelector('.container-form:nth-child(2)').style.display = 'block';
-            });
         });
     </script>
     <style>
