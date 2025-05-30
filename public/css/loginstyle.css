@@ -90,7 +90,7 @@ body{
     background-color: #3AB397;
     color: white;
 }
-/*Animacion pitera para el form xd*/
+/Animacion pitera para el form xd/
 
 .sign-up{
     transform: translateX(-100%);
@@ -102,7 +102,7 @@ body{
     transform: translateX(0%);
 }
 
-/*WELCOME PE CAUSAAAA*/
+/WELCOME PE CAUSAAAA/
 .container-welcome{
     position: absolute;
     width: 50%;
@@ -203,4 +203,4 @@ body{
         width: 100%;
         padding: 10px 0;
     }
-} 
+}
