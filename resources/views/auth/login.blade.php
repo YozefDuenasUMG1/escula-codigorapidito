@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
-    <link rel="stylesheet" href="{{ secure_asset('css/loginstyle.css') }}">
+    <link rel="stylesheet" href="/css/loginstyle.css">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body>
@@ -121,7 +121,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ secure_asset('js/loginjs.js') }}"></script>
+    <script src="/js/loginjs.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -146,6 +146,33 @@
             btn.disabled = true;
             spinner.classList.remove('d-none');
             btnText.textContent = 'Ingresando...';
+        });
+        // Mostrar u ocultar botón de registro móvil
+        function toggleMobileSignupButton() {
+            const mobileSignupBtn = document.getElementById('mobile-signup-btn');
+            if (window.innerWidth < 768) { // Pantallas móviles
+                mobileSignupBtn.style.display = 'block';
+            } else {
+                mobileSignupBtn.style.display = 'none';
+            }
+        }
+        window.addEventListener('resize', toggleMobileSignupButton);
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleMobileSignupButton();
+            // Alternar formulario de inicio de sesión y registro
+            document.getElementById('btn-sign-up').addEventListener('click', function() {
+                document.querySelector('.container-form:nth-child(1)').style.display = 'none';
+                document.querySelector('.container-form:nth-child(2)').style.display = 'block';
+            });
+            document.getElementById('btn-sign-in').addEventListener('click', function() {
+                document.querySelector('.container-form:nth-child(1)').style.display = 'block';
+                document.querySelector('.container-form:nth-child(2)').style.display = 'none';
+            });
+            // Redirigir botón móvil a registro
+            document.getElementById('mobile-signup-btn').addEventListener('click', function() {
+                document.querySelector('.container-form:nth-child(1)').style.display = 'none';
+                document.querySelector('.container-form:nth-child(2)').style.display = 'block';
+            });
         });
     </script>
     <style>

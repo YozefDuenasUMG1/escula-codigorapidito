@@ -9,65 +9,56 @@ btnSignUp.addEventListener("click", () => {
     container.classList.add("toggle");
 });
 
-// Validación para el formulario de login
-const signInForm = document.querySelector('.sign-in');
-if (signInForm) {
-    signInForm.addEventListener('submit', function(e) {
-        let valid = true;
-        // Limpiar errores previos
-        document.querySelectorAll('.sign-in .error-front').forEach(el => el.remove());
-
-        const email = this.email.value.trim();
-        const password = this.password.value.trim();
-
-        // Validar email
-        if (!email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
-            showError(this.email, 'Ingrese un correo válido');
-            valid = false;
+// El archivo loginjs.js debe restaurarse a su versión original, sin lógica de alternancia de formularios ni botones adicionales. Si tu archivo original solo tenía funciones para mostrar/ocultar contraseña y spinner, déjalo así:
+document.querySelectorAll('.toggle-password').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        const target = document.getElementById(this.getAttribute('data-target'));
+        if (target.type === 'password') {
+            target.type = 'text';
+            this.querySelector('ion-icon').setAttribute('name', 'eye-off-outline');
+        } else {
+            target.type = 'password';
+            this.querySelector('ion-icon').setAttribute('name', 'eye-outline');
         }
-        // Validar contraseña
-        if (password.length === 0) {
-            showError(this.password, 'Ingrese su contraseña');
-            valid = false;
-        }
-        if (!valid) e.preventDefault();
+    });
+});
+if(document.getElementById('loginForm')) {
+    document.getElementById('loginForm').addEventListener('submit', function() {
+        var btn = document.getElementById('loginBtn');
+        var spinner = document.getElementById('spinner');
+        var btnText = document.getElementById('loginBtnText');
+        btn.setAttribute('aria-busy', 'true');
+        btn.disabled = true;
+        spinner.classList.remove('d-none');
+        btnText.textContent = 'Ingresando...';
     });
 }
 
-// Validación para el formulario de registro
-const signUpForm = document.querySelector('.sign-up');
-if (signUpForm) {
-    signUpForm.addEventListener('submit', function(e) {
-        let valid = true;
-        document.querySelectorAll('.sign-up .error-front').forEach(el => el.remove());
+// Mostrar solo el formulario de login en móvil por defecto y alternar con el botón debajo de Iniciar sesión
+function mostrarSoloLoginEnMovil() {
+    if (window.innerWidth <= 600) {
+        document.querySelectorAll('.container-form').forEach(f => f.classList.remove('active'));
+        var loginForm = document.querySelectorAll('.container-form')[0];
+        if (loginForm) loginForm.classList.add('active');
+        // Mostrar botón de alternancia
+        var btn = document.getElementById('mobile-signup-btn');
+        if (btn) btn.style.display = 'block';
+    } else {
+        document.querySelectorAll('.container-form').forEach(f => f.classList.add('active'));
+        var btn = document.getElementById('mobile-signup-btn');
+        if (btn) btn.style.display = 'none';
+    }
+}
+window.addEventListener('DOMContentLoaded', mostrarSoloLoginEnMovil);
+window.addEventListener('resize', mostrarSoloLoginEnMovil);
 
-        const name = this.name.value.trim();
-        const email = this.email.value.trim();
-        const password = this.password.value.trim();
-
-        if (name.length === 0) {
-            showError(this.name, 'Ingrese su nombre');
-            valid = false;
-        }
-        if (!email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
-            showError(this.email, 'Ingrese un correo válido');
-            valid = false;
-        }
-        if (password.length < 6) {
-            showError(this.password, 'La contraseña debe tener al menos 6 caracteres');
-            valid = false;
-        }
-        if (!valid) e.preventDefault();
+// Alternar a registro en móvil usando el botón debajo de Iniciar sesión
+var btnMobileSignup = document.getElementById('mobile-signup-btn');
+if (btnMobileSignup) {
+    btnMobileSignup.addEventListener('click', function() {
+        document.querySelectorAll('.container-form').forEach(f => f.classList.remove('active'));
+        var signupForm = document.querySelectorAll('.container-form')[1];
+        if (signupForm) signupForm.classList.add('active');
+        btnMobileSignup.style.display = 'none';
     });
 }
-
-// Función para mostrar errores
-function showError(input, message) {
-    const div = document.createElement('div');
-    div.className = 'error-front';
-    div.style.color = 'red';
-    div.style.fontSize = '12px';
-    div.style.marginBottom = '5px';
-    div.innerText = message;
-    input.parentNode.insertBefore(div, input.nextSibling);
-} 
