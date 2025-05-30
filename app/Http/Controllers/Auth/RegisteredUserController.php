@@ -39,24 +39,30 @@ class RegisteredUserController extends Controller
             return redirect()->route('login')->with('error', 'Solo el administrador puede registrar usuarios.');
         }
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'in:admin,profesor,alumno'],
         ]);
-
+        $role = $request->input('role', 'alumno');
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'role' => $role,
         ]);
-
+        if ($role === 'profesor') {
+            \App\Models\Profesor::create([
+                'nombre' => $user->name,
+                'email' => $user->email,
+                'id_user' => $user->id,
+                'telefono' => '',
+                'especialidad' => '',
+                'id_sucursal' => null,
+                'id_nivel' => null,
+            ]);
+        }
         event(new Registered($user));
-
-        // No iniciar sesión automáticamente
-        // Auth::login($user);
-
-        return redirect()->route('login')->with('status', 'Usuario registrado correctamente');
+        Auth::login($user);
+        return redirect(RouteServiceProvider::HOME);
     }
 }

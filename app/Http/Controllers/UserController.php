@@ -34,6 +34,43 @@ class UserController extends Controller
             'role' => 'required|in:admin,profesor,alumno',
         ]);
         $usuario->update($validated);
+        // Manejo de registros extendidos según el rol
+        if ($validated['role'] === 'profesor') {
+            // Crear en profesores si no existe
+            if (!\App\Models\Profesor::where('id_user', $usuario->id)->exists()) {
+                \App\Models\Profesor::create([
+                    'nombre' => $usuario->name,
+                    'email' => $usuario->email,
+                    'id_user' => $usuario->id,
+                    'telefono' => '',
+                    'especialidad' => '',
+                    'id_sucursal' => null,
+                    'id_nivel' => null,
+                ]);
+            }
+            // Eliminar en alumnos si existe
+            \App\Models\Alumno::where('id_user', $usuario->id)->delete();
+        } elseif ($validated['role'] === 'alumno') {
+            // Crear en alumnos si no existe
+            if (!\App\Models\Alumno::where('id_user', $usuario->id)->exists()) {
+                \App\Models\Alumno::create([
+                    'nombre' => $usuario->name,
+                    'email' => $usuario->email,
+                    'numero' => '',
+                    'direccion' => '',
+                    'id_sucursal' => null,
+                    'id_nivel' => null,
+                    'id_curso' => null,
+                    'id_user' => $usuario->id,
+                ]);
+            }
+            // Eliminar en profesores si existe
+            \App\Models\Profesor::where('id_user', $usuario->id)->delete();
+        } elseif ($validated['role'] === 'admin') {
+            // Eliminar en ambas si existen
+            \App\Models\Profesor::where('id_user', $usuario->id)->delete();
+            \App\Models\Alumno::where('id_user', $usuario->id)->delete();
+        }
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado correctamente.');
     }
 
