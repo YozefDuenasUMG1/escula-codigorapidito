@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container responsive-auth">
-        <div class="container-form login-form active">
+    <div class="container">
+        <div class="container-form">
             <form method="POST" action="{{ route('login') }}" id="loginForm" aria-label="Formulario de inicio de sesión">
                 @csrf
                 <h2>Inicio de sesión</h2>
@@ -50,9 +50,10 @@
                     <span id="loginBtnText">Iniciar sesión</span>
                     <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                 </button>
+                <button type="button" class="button w-100 mt-2" id="goToRegisterMobile" style="display:block; margin-top:10px; background:#2D8C8C;">¿No tienes cuenta? Regístrate</button>
             </form>
         </div>
-        <div class="container-form register-form">
+        <div class="container-form">
             <form class="sign-up" method="POST" action="{{ route('register') }}">
                 @csrf
                 <h2>Registrarse</h2>
@@ -106,22 +107,19 @@
                     <div class="error" style="color:red; font-size:12px;">{{ $message }}</div>
                 @enderror
                 <button class="button" type="submit">REGISTRARSE</button>
+                <button type="button" class="button w-100 mt-2" id="goToLoginMobile" style="display:block; margin-top:10px; background:#3AB397;">¿Ya tienes cuenta? Inicia sesión</button>
             </form>
         </div>
-        <div class="container-welcome mobile-toggle">
-            <button class="button" id="mobile-btn-sign-in" type="button">Iniciar sesión</button>
-            <button class="button" id="mobile-btn-sign-up" type="button">Registrarse</button>
-        </div>
-        <div class="container-welcome desktop-toggle">
+        <div class="container-welcome">
             <div class="welcome-sign-up welcome">
                 <h3>¡Bienvenido!</h3>
                 <p>Ingrese sus datos para ingresar a la Academia Código Rapidito</p>
-                <button class="button" id="btn-sign-up" type="button">Registrarse</button>
+                <button class="button" id="btn-sign-up">Registrarse</button>
             </div>
             <div class="welcome-sign-in welcome">
                 <h3>¡Hola!</h3>
-                <p>Regístrese con sus datos para ingresar a la Academia Código Rapidito</p>
-                <button class="button" id="btn-sign-in" type="button">Iniciar sesión</button>
+                <p>Regístrese con sus datos para ingresar a la Academia Código Rapidito</P>
+                <button class="button" id="btn-sign-in">Iniciar sesión</button>
             </div>
         </div>
     </div>
@@ -151,20 +149,16 @@
             spinner.classList.remove('d-none');
             btnText.textContent = 'Ingresando...';
         });
-        // Responsive toggle for mobile
-        function showLogin() {
-            document.querySelector('.login-form').classList.add('active');
-            document.querySelector('.register-form').classList.remove('active');
-        }
-        function showRegister() {
-            document.querySelector('.login-form').classList.remove('active');
-            document.querySelector('.register-form').classList.add('active');
-        }
-        document.getElementById('mobile-btn-sign-in').addEventListener('click', showLogin);
-        document.getElementById('mobile-btn-sign-up').addEventListener('click', showRegister);
-        // Desktop toggle (ya existente)
-        document.getElementById('btn-sign-in').addEventListener('click', showLogin);
-        document.getElementById('btn-sign-up').addEventListener('click', showRegister);
+        document.getElementById('goToRegisterMobile').addEventListener('click', function() {
+            document.querySelectorAll('.container-form')[0].style.display = 'none';
+            document.querySelectorAll('.container-form')[1].style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        document.getElementById('goToLoginMobile').addEventListener('click', function() {
+            document.querySelectorAll('.container-form')[1].style.display = 'none';
+            document.querySelectorAll('.container-form')[0].style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     </script>
     <style>
         /* Accesibilidad: alto contraste para errores */
@@ -239,72 +233,6 @@
             background: linear-gradient(90deg, #2D8C8C 0%, #3AB397 100%);
             box-shadow: 0 4px 16px 0 rgba(58,179,151,0.18);
             transform: translateY(-2px) scale(1.03);
-        }
-        .responsive-auth {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: stretch;
-            min-height: 100vh;
-        }
-        .container-form {
-            width: 100%;
-            max-width: 400px;
-            background: #fff;
-            margin: 2rem;
-            box-shadow: 0 2px 16px 0 rgba(58,179,151,0.10);
-            border-radius: 12px;
-            padding: 2rem 1.5rem;
-            transition: box-shadow 0.2s;
-        }
-        .container-form:not(.active) {
-            display: none;
-        }
-        .container-form.active {
-            display: block;
-        }
-        .container-welcome.desktop-toggle {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 350px;
-            margin: 2rem;
-        }
-        .container-welcome.mobile-toggle {
-            display: none;
-            flex-direction: row;
-            justify-content: space-between;
-            margin: 1rem 0;
-            gap: 1rem;
-        }
-        @media (max-width: 900px) {
-            .responsive-auth {
-                flex-direction: column;
-                align-items: center;
-                min-height: unset;
-            }
-            .container-welcome.desktop-toggle {
-                display: none;
-            }
-            .container-welcome.mobile-toggle {
-                display: flex;
-            }
-            .container-form {
-                margin: 1rem 0.5rem;
-                width: 100%;
-                max-width: 100%;
-                box-shadow: 0 1px 8px 0 rgba(58,179,151,0.10);
-            }
-        }
-        @media (max-width: 600px) {
-            .container-form {
-                padding: 1.2rem 0.5rem;
-            }
-            .container-welcome.mobile-toggle button {
-                font-size: 1rem;
-                padding: 0.6rem 0.8rem;
-            }
         }
     </style>
     @if (session('status'))
